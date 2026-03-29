@@ -1,9 +1,18 @@
 {
-  "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ESNext"],
+    "jsx": "react-native",
+    "moduleResolution": "Bundler",
     "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
     "paths": {
-      "@/*": ["./*"]
+      "react-native-video-suite": ["./src/index"]
     }
-  }
+  },
+  "include": ["src"]
 }

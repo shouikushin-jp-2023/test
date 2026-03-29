@@ -1,44 +1,66 @@
 {
-  "name": "expo-video-player",
+  "name": "react-native-video-suite",
   "version": "1.0.0",
-  "main": "expo-router/entry",
-  "scripts": {
-    "start": "expo start",
-    "android": "expo run:android",
-    "ios": "expo run:ios",
-    "web": "expo start --web",
-    "lint": "eslint ."
+  "description": "Expo / React Native video player supporting MP4, HLS (m3u8), FLV, DASH, real-time danmaku, WBI signing, and live streaming.",
+  "keywords": [
+    "expo",
+    "react-native",
+    "video",
+    "player",
+    "hls",
+    "dash",
+    "flv",
+    "m3u8",
+    "danmaku",
+    "live",
+    "streaming",
+    "wbi"
+  ],
+  "homepage": "https://github.com/your-org/react-native-video-suite#readme",
+  "bugs": {
+    "url": "https://github.com/your-org/react-native-video-suite/issues"
   },
-  "dependencies": {
-    "@expo/vector-icons": "^15.0.2",
-    "@react-native-async-storage/async-storage": "2.2.0",
-    "axios": "^1.13.6",
-    "expo": "~55.0.5",
-    "expo-av": "^16.0.8",
-    "expo-clipboard": "~55.0.9",
-    "expo-constants": "~55.0.9",
-    "expo-dev-client": "~55.0.11",
-    "expo-file-system": "~55.0.10",
-    "expo-linear-gradient": "~55.0.8",
-    "expo-router": "~55.0.4",
-    "expo-screen-orientation": "~55.0.8",
-    "expo-secure-store": "~55.0.9",
-    "expo-status-bar": "~55.0.4",
-    "pako": "^2.1.0",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "react-native": "0.83.2",
-    "react-native-safe-area-context": "~5.6.2",
-    "react-native-screens": "~4.23.0",
-    "react-native-svg": "15.15.3",
-    "react-native-video": "^6.19.0",
-    "react-native-web": "^0.21.0",
-    "zustand": "^5.0.11"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-org/react-native-video-suite.git"
+  },
+  "license": "MIT",
+  "author": "your-name",
+  "source": "src/index",
+  "main": "src/index",
+  "types": "src/index",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "lint": "eslint src --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit",
+    "example": "cd example && expo start"
+  },
+  "peerDependencies": {
+    "expo-file-system": ">=14",
+    "expo-screen-orientation": ">=4",
+    "pako": ">=2",
+    "react": ">=18",
+    "react-native": ">=0.73",
+    "react-native-video": ">=6",
+    "zustand": ">=4"
+  },
+  "peerDependenciesMeta": {
+    "expo-file-system": { "optional": false },
+    "expo-screen-orientation": { "optional": true },
+    "pako": { "optional": true }
   },
   "devDependencies": {
-    "@babel/core": "^7.25.2",
     "@types/pako": "^2.0.4",
     "@types/react": "~19.2.2",
-    "typescript": "~5.9.2"
+    "expo-file-system": "~55.0.10",
+    "expo-screen-orientation": "~55.0.8",
+    "pako": "^2.1.0",
+    "react": "19.2.0",
+    "react-native": "0.83.2",
+    "react-native-video": "^6.19.0",
+    "typescript": "~5.9.2",
+    "zustand": "^5.0.11"
   }
 }

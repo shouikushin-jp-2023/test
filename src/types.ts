@@ -1,9 +1,26 @@
-// ─── Video ───────────────────────────────────────────────────────────────────
+// ─── Owner / User ─────────────────────────────────────────────────────────────
 
 export interface VideoOwner {
   uid: number;
   name: string;
   avatar: string;
+}
+
+export interface UserInfo {
+  uid: number;
+  uname: string;
+  face: string;
+  level: number;
+  isLogin: boolean;
+}
+
+// ─── Video metadata ───────────────────────────────────────────────────────────
+
+export interface VideoPage {
+  cid: number;
+  page: number;
+  part: string;
+  duration: number;
 }
 
 export interface VideoItem {
@@ -14,23 +31,14 @@ export interface VideoItem {
   pic: string;
   owner: VideoOwner;
   duration: number;
-  /** view count */
   view?: number;
   like?: number;
   coin?: number;
   favorite?: number;
   reply?: number;
   cid?: number;
-  /** multi-part pages */
   pages?: VideoPage[];
   isLive?: boolean;
-}
-
-export interface VideoPage {
-  cid: number;
-  page: number;
-  part: string;
-  duration: number;
 }
 
 // ─── Playback ─────────────────────────────────────────────────────────────────
@@ -78,17 +86,14 @@ export interface DashData {
 }
 
 export interface PlayUrlResponse {
-  /** quality number of the current stream */
   quality: number;
-  /** accepted quality numbers */
   accept_quality: number[];
-  /** quality descriptions */
   accept_description: string[];
-  /** progressive download (non-DASH) */
+  /** Progressive download streams */
   durl?: DurlItem[];
-  /** DASH streams */
+  /** DASH adaptive streams */
   dash?: DashData;
-  /** video format: mp4 | flv | dash */
+  /** Stream container: mp4 | flv | dash */
   format?: string;
 }
 
@@ -99,7 +104,7 @@ export interface VideoQuality {
 
 // ─── Danmaku ──────────────────────────────────────────────────────────────────
 
-/** mode 1=scrolling  4=bottom-fixed  5=top-fixed */
+/** mode 1=scroll  4=bottom-fixed  5=top-fixed */
 export interface DanmakuItem {
   time: number;
   mode: 1 | 4 | 5;
@@ -129,7 +134,7 @@ export interface Comment {
   replies?: Comment[];
 }
 
-// ─── Live ─────────────────────────────────────────────────────────────────────
+// ─── Live streaming ───────────────────────────────────────────────────────────
 
 export interface LiveRoom {
   roomId: number;
@@ -170,15 +175,13 @@ export interface LiveStreamQuality {
 }
 
 export interface LiveStreamInfo {
-  /** HLS stream URL */
   hls?: string;
-  /** FLV stream URL */
   flv?: string;
   qualities: LiveStreamQuality[];
   currentQn: number;
 }
 
-// ─── Live Danmaku (WebSocket) ─────────────────────────────────────────────────
+// ─── Live danmaku (WebSocket) ─────────────────────────────────────────────────
 
 export type LiveDanmakuMessage =
   | { type: 'danmaku'; uid: number; uname: string; text: string; color: number; badge?: string; badgeLevel?: number }
@@ -209,19 +212,6 @@ export interface SearchResult {
   page: number;
 }
 
-// ─── Video Thumbnail Sprites ──────────────────────────────────────────────────
-
-export interface VideoShotData {
-  imgX: number;
-  imgY: number;
-  imgXLen: number;
-  imgYLen: number;
-  xLen: number;
-  yLen: number;
-  pvData: number[];
-  images: string[];
-}
-
 // ─── Auth ─────────────────────────────────────────────────────────────────────
 
 export interface QRCodeData {
@@ -233,12 +223,4 @@ export interface QRPollResult {
   status: 'expired' | 'not_scanned' | 'scanned' | 'confirmed';
   sessdata?: string;
   bili_jct?: string;
-}
-
-export interface UserInfo {
-  uid: number;
-  uname: string;
-  face: string;
-  level: number;
-  isLogin: boolean;
 }

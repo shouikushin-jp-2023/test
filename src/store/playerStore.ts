@@ -1,7 +1,7 @@
 import { create } from 'zustand';
-import type { PlayUrlResponse, DanmakuItem, VideoItem, LiveStreamInfo } from '../services/types';
+import type { PlayUrlResponse, DanmakuItem, VideoItem, LiveStreamInfo } from '../types';
 
-// ─── VOD player state ─────────────────────────────────────────────────────────
+// ─── VOD ──────────────────────────────────────────────────────────────────────
 
 interface VodState {
   videoItem: VideoItem | null;
@@ -10,7 +10,6 @@ interface VodState {
   currentQn: number;
   currentTime: number;
   showDanmaku: boolean;
-
   setVideoItem: (v: VideoItem | null) => void;
   setPlayData: (p: PlayUrlResponse | null) => void;
   setDanmakus: (d: DanmakuItem[]) => void;
@@ -27,34 +26,25 @@ export const useVodStore = create<VodState>((set) => ({
   currentQn: 80,
   currentTime: 0,
   showDanmaku: true,
-
   setVideoItem: (videoItem) => set({ videoItem }),
   setPlayData: (playData) => set({ playData }),
   setDanmakus: (danmakus) => set({ danmakus }),
   setCurrentQn: (currentQn) => set({ currentQn }),
   setCurrentTime: (currentTime) => set({ currentTime }),
   toggleDanmaku: () => set((s) => ({ showDanmaku: !s.showDanmaku })),
-  reset: () =>
-    set({
-      videoItem: null,
-      playData: null,
-      danmakus: [],
-      currentQn: 80,
-      currentTime: 0,
-      showDanmaku: true,
-    }),
+  reset: () => set({ videoItem: null, playData: null, danmakus: [], currentQn: 80, currentTime: 0, showDanmaku: true }),
 }));
 
-// ─── Live player state ────────────────────────────────────────────────────────
+// ─── Live ─────────────────────────────────────────────────────────────────────
+
+const MAX_LIVE_DANMAKUS = 200;
 
 interface LiveState {
   roomId: number | null;
   streamInfo: LiveStreamInfo | null;
   isLive: boolean;
-  /** live danmaku messages rendered as DanmakuItem for the overlay */
   liveDanmakus: DanmakuItem[];
   showDanmaku: boolean;
-
   setRoomId: (id: number | null) => void;
   setStreamInfo: (info: LiveStreamInfo | null) => void;
   setIsLive: (v: boolean) => void;
@@ -64,43 +54,29 @@ interface LiveState {
   reset: () => void;
 }
 
-const MAX_LIVE_DANMAKUS = 200;
-
 export const useLiveStore = create<LiveState>((set) => ({
   roomId: null,
   streamInfo: null,
   isLive: false,
   liveDanmakus: [],
   showDanmaku: true,
-
   setRoomId: (roomId) => set({ roomId }),
   setStreamInfo: (streamInfo) => set({ streamInfo }),
   setIsLive: (isLive) => set({ isLive }),
   addLiveDanmaku: (d) =>
-    set((s) => {
-      const next = [...s.liveDanmakus, d];
-      return { liveDanmakus: next.slice(-MAX_LIVE_DANMAKUS) };
-    }),
+    set((s) => ({ liveDanmakus: [...s.liveDanmakus, d].slice(-MAX_LIVE_DANMAKUS) })),
   clearLiveDanmakus: () => set({ liveDanmakus: [] }),
   toggleDanmaku: () => set((s) => ({ showDanmaku: !s.showDanmaku })),
-  reset: () =>
-    set({
-      roomId: null,
-      streamInfo: null,
-      isLive: false,
-      liveDanmakus: [],
-      showDanmaku: true,
-    }),
+  reset: () => set({ roomId: null, streamInfo: null, isLive: false, liveDanmakus: [], showDanmaku: true }),
 }));
 
-// ─── Auth / user state ────────────────────────────────────────────────────────
+// ─── Auth ─────────────────────────────────────────────────────────────────────
 
 interface AuthState {
   uid: number | null;
   uname: string;
   face: string;
   isLogin: boolean;
-
   setUser: (uid: number, uname: string, face: string) => void;
   clearUser: () => void;
 }
@@ -110,7 +86,6 @@ export const useAuthStore = create<AuthState>((set) => ({
   uname: '',
   face: '',
   isLogin: false,
-
   setUser: (uid, uname, face) => set({ uid, uname, face, isLogin: true }),
   clearUser: () => set({ uid: null, uname: '', face: '', isLogin: false }),
 }));

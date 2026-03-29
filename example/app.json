@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "VideoSuiteExample",
+    "slug": "video-suite-example",
+    "version": "1.0.0",
+    "orientation": "default",
+    "userInterfaceStyle": "dark",
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.videosuite.example",
+      "infoPlist": {
+        "NSAppTransportSecurity": { "NSAllowsArbitraryLoads": true }
+      }
+    },
+    "android": {
+      "package": "com.videosuite.example",
+      "permissions": ["android.permission.INTERNET", "android.permission.ACCESS_NETWORK_STATE"]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-screen-orientation",
+      ["react-native-video", { "enableNotificationControls": false }]
+    ],
+    "experiments": { "typedRoutes": true },
+    "scheme": "videosuite"
+  }
+}
